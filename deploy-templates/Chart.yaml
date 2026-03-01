@@ -4,3 +4,9 @@ description: A Helm chart for backend-helm application
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
+home: https://github.com/vg940389/backend-helm
+sources:
+  - https://github.com/vg940389/backend-helm
+maintainers:
+  - name: Your Name
+    email: your.email@example.com
