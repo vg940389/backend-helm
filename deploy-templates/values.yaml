@@ -24,19 +24,31 @@ imagePullSecrets: []
 podSecurityContext: {}
 securityContext: {}
 
+resources:
+  # Specifies the resource allocation for the container.
+  # This ensures proper scheduling and efficient resource management in the cluster.
+  limits:
+    cpu: 1000m       # The maximum CPU the container can use (1000m = 1 CPU core).
+    memory: 256Mi    # The maximum memory the container can use (256Mi = 256 megabytes).
+  requests:
+    cpu: 500m        # The minimum CPU guaranteed for the container (500m = 0.5 CPU core).
+    memory: 128Mi    # The minimum memory guaranteed for the container (128Mi = 128 megabytes).
+
 livenessProbe:
-  httpGet:
-    path: /health
-    port: 8080
-  initialDelaySeconds: 30
-  periodSeconds: 10
- 
+  tcpSocket:
+    port: http
 readinessProbe:
-  httpGet:
-    path: /health
-    port: 8080
-  initialDelaySeconds: 5
-  periodSeconds: 5
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 20
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
  
 resources: {}
 
