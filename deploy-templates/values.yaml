@@ -1,13 +1,48 @@
 replicaCount: 1
 
+autoscaling:
+  enabled: false
+
 image:
   repository: backend-helm
   pullPolicy: IfNotPresent
   tag: ""
 
-ingress:
-  enabled: true
-  dnsWildcard: development.krci-dev.cloudmentor.academy
+service:
+  type: ClusterIP
+  port: 8080
 
 serviceAccount:
-   name: ""
+  create: false
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+imagePullSecrets: []
+
+podSecurityContext: {}
+securityContext: {}
+
+livenessProbe: {}
+readinessProbe: {}
+resources: {}
+
+volumeMounts: []
+volumes: []
+
+nodeSelector: {}
+affinity: {}
+tolerations: []
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+  tls: []
+  hosts:
+    - host: edpDefault
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  dnsWildcard: development.krci-dev.cloudmentor.academy
